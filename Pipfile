@@ -13,6 +13,7 @@ pillow = "*"
 django-annoying = "*"
 pylint-django = "*"
 gunicorn = "*"
+whitenoise = "*"
 
 [requires]
 python_version = "3.7"
