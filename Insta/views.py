@@ -4,6 +4,7 @@ from django.views.generic import TemplateView, ListView, DetailView
 from Insta.models import InstaUser, Post, Like, Comment, UserConnection
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
+ 
 from Insta.forms import CustomUserCreationForm
 
 from django.contrib.auth.mixins import  LoginRequiredMixin
@@ -72,10 +73,12 @@ class ProfileUpdate(LoginRequiredMixin,UpdateView):
     template_name = 'user_update.html'
     fields = ['profile_pic', 'username']
     login_url = 'login'
-    success_url = reverse_lazy('posts')
+    success_url = 'user_detail', 
     
-    # def get_absolute_url(self):
-    #     return reverse_lazy('user_detail', kwargs={'pk': self.pk})
+    def get_success_url(self):
+        return reverse('user_detail', args=(self.object.pk,))
+
+
 
 class ExploreView(LoginRequiredMixin, ListView):
     model = Post
